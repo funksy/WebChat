@@ -24,6 +24,7 @@ services:
             CORS_HOST: http://localhost:5173
             DB_URL: mongodb://root:example@mongo:27017/
             DB_NAME: chat_db
+            SIGNING_KEY: elbp36dem3opvjxm8rb3kdgd
         build:
             context: api
             dockerfile: Dockerfile.dev
@@ -32,6 +33,7 @@ services:
         user: "1000:1000" # on macOS and Linux, replace this with your real user id and group id
         volumes:
             - ./api:/app
+
 
     ghi:
         image: node:lts-bullseye
