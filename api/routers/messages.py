@@ -1,3 +1,4 @@
+from pymongo.errors import WriteError
 from fastapi import (
     Depends,
     HTTPException,
@@ -26,7 +27,7 @@ def create_message(
 ):
     try:
         return repo.create_message(new_message)
-    except:
+    except WriteError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create message DERP",
@@ -43,13 +44,7 @@ def get_room_message_list(
     repo: MessageRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    try:
-        return repo.get_room_message_list(chatroom_id)
-    except:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot create message DERP",
-        )
+    return repo.get_room_message_list(chatroom_id)
 
 
 @router.get(
@@ -60,10 +55,4 @@ def get_message(
     repo: MessageRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    try:
-        return repo.get_message(id)
-    except:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot create message DERP",
-        )
+    return repo.get_message(id)

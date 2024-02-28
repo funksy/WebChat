@@ -50,5 +50,4 @@ class MessageRepository(Queries):
         self.collection.insert_one(new_message)
         new_message["id"] = str(new_message["_id"])
         del new_message["_id"]
-        print("***" * 4, new_message)
         return new_message
