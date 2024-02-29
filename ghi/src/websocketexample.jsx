@@ -6,15 +6,14 @@ export const WebSocketDemo = () => {
   const [socketUrl, setSocketUrl] = useState('ws://localhost:8000/chat/1');
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const { sendMessage, readyState, lastJsonMessage } = useWebSocket(socketUrl);
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    if (lastMessage !== null) {
-      setMessageHistory((prev) => prev.concat(lastMessage));
+    if (lastJsonMessage !== null) {
+      setMessageHistory((prev) => prev.concat(lastJsonMessage));
     }
-  }, [lastMessage]);
-
+  }, [lastJsonMessage]);
 
   const handleClickSendMessage = useCallback(() => sendMessage(content), [content]);
 
@@ -36,10 +35,10 @@ export const WebSocketDemo = () => {
         Click Me to send 'Hello'
       </button>
       <span>The WebSocket is currently {connectionStatus}</span>
-      {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
+      {lastJsonMessage ? <span>Last message: {lastJsonMessage.content}</span> : null}
       <ul>
         {messageHistory.map((message, idx) => (
-          <span key={idx}>{message ? message.data : null}</span>
+          <li key={idx}>{message.timestamp} {message ? message.content : null}</li>
         ))}
       </ul>
     </div>

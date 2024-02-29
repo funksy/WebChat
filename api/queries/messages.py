@@ -41,6 +41,7 @@ class MessageRepository(Queries):
         db_cursor = self.collection.find({"chatroom_id": chatroom_id})
         for message in db_cursor:
             message["id"] = str(message["_id"])
+            del message["_id"]
             messages.append(message)
         return {"messages": messages}
 
