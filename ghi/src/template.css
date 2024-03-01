@@ -1,0 +1,58 @@
+.main_page {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    background-color:cadetblue;
+    overflow-x: auto;
+
+}
+
+.vertnavbar {
+    align-items: center;
+    flex-basis: 180px;
+    width: 180px;
+    height: 100vh;
+    background-color:blue;
+    flex-shrink: 0;
+
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    background-color: red;
+}
+.logo img {
+    width: 180px;
+    height: auto;
+}
+.maincontent {
+    background-color:brown;
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 500px;
+}
+
+.chatbox {}
+
+.chatinput {}
+
+.chatbutton {}
+
+.sidebar {
+    align-items: center;
+    flex-basis: 180px;
+    width: 180px;
+    height: 100vh;
+    background-color: blue;
+    flex-shrink: 0;
+
+}
+
+.user_avatar {}
+
+.logout_button {}
+
+.list_of_users {}
