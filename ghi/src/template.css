@@ -1,3 +1,7 @@
+body {
+    margin: 0px;
+}
+
 .main_page {
     display: flex;
     flex-direction: row;
@@ -20,7 +24,6 @@
 .logo {
     width: 180px;
     height: auto;
-    background-color: red;
 }
 .logo img {
     width: 180px;
@@ -35,14 +38,38 @@
     min-width: 500px;
 }
 
-.chatbox {}
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 100%;
+    background-color: green;
+}
 
-.chatinput {}
+.chatbox li {
+    text-align: bottom;
+    position: relative;
+}
+.chatinterface {
+    display: flex;
+    flex-direction: row;
+    background-color: yellow;
+    height: 75px;
+}
 
-.chatbutton {}
+.chatinput {
+    width: 100%;
+    background-color: red;
+}
+
+.chatbutton {
+    background-color: orange;
+    width: 100px;
+}
 
 .sidebar {
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     flex-basis: 180px;
     width: 180px;
     height: 100vh;
@@ -51,8 +78,20 @@
 
 }
 
-.user_avatar {}
+.user_avatar {
+    height: 150px;
+    background-color: purple;
+    width: 100%;
 
-.logout_button {}
+}
 
-.list_of_users {}
+.logout_button {
+    height: 30px;
+    background-color: pink;
+    width: 100%
+}
+
+.list_of_users {
+    background-color: gray;
+    height: 100%
+}
