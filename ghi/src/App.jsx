@@ -5,6 +5,7 @@ import ErrorNotification from './ErrorNotification'
 import Construct from './Construct'
 import './App.css'
 import { WebSocketDemo } from './websocketexample'
+import MainPage from './components/MainPage'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -56,7 +57,7 @@ function App() {
 
     return (
         <div>
-            <WebSocketDemo />
+            <MainPage/>
         </div>
     )
 }
