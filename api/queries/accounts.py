@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 from jwtdown_fastapi.authentication import Token
 from .client import Queries
 
@@ -19,6 +20,10 @@ class DuplicateAccountError(ValueError):
 class AccountOut(BaseModel):
     id: str
     username: str
+
+
+class ListAccountOut(BaseModel):
+    accounts: List[AccountOut]
 
 
 class AccountIn(BaseModel):
@@ -42,6 +47,16 @@ class AccountRepository(Queries):
         account["id"] = str(account["_id"])
         del account["_id"]
         return Account(**account)
+
+    def get_account_list(self) -> AccountOut:
+        db_cursor = self.collection.find()
+        account_list = []
+        for account in db_cursor:
+            account["id"] = str(account["_id"])
+            del account["_id"]
+            account_list.append(account)
+
+        return ListAccountOut(accounts=account_list)
 
     def create_account(
         self, info: AccountIn, hashed_password: str

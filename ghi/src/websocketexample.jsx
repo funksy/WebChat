@@ -12,6 +12,7 @@ export const WebSocketDemo = () => {
   useEffect(() => {
     if (lastJsonMessage !== null) {
       setMessageHistory((prev) => prev.concat(lastJsonMessage));
+      console.log(JSON.parse(lastJsonMessage))
     }
   }, [lastJsonMessage]);
 

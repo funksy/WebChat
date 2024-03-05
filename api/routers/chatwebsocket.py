@@ -1,6 +1,6 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
 from queries.chatwebsocket import manager
-from queries.messages import MessageRepository, MessageIn, MessageOut
+from queries.messages import MessageRepository, MessageIn
 
 
 router = APIRouter()
@@ -11,7 +11,6 @@ async def websocket_endpoint(
     websocket: WebSocket,
     client_id: str,
     repo: MessageRepository = Depends(),
-
 ):
     messages = repo.get_room_message_list("1")["messages"]
     for message in messages:
@@ -21,8 +20,12 @@ async def websocket_endpoint(
     try:
         while True:
             message = await websocket.receive_text()
-            new_message = MessageIn(user_id=client_id, chatroom_id=1, content=message)
-            repo.create_message(new_message)
+            new_message = MessageIn(
+                user_id=client_id,
+                chatroom_id=1,
+                content=message
+            )
+            new_message = repo.create_message(new_message)
 
             await manager.broadcast(message)
     except WebSocketDisconnect:

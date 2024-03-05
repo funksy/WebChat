@@ -9,6 +9,7 @@ from fastapi import (
 from authenticator import authenticator
 from queries.accounts import (
     AccountIn,
+    ListAccountOut,
     AccountRepository,
     DuplicateAccountError,
     AccountForm,
@@ -43,6 +44,6 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-# @router.get("/accounts", response_model=AccountOut, tags=["accounts"])
-# def get_account(account:AccountIn, repo:AccountRepository=Depends()):
-#     return repo.get_account(account)
+@router.get("/accounts", response_model=ListAccountOut, tags=["accounts"])
+def get_account_list(repo: AccountRepository = Depends()):
+    return repo.get_account_list()
