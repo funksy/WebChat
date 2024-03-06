@@ -1,6 +1,5 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
-from queries.websocket import manager, ConnectionManager
-from queries.websocket import MessageRepository
+from queries.websocket import ConnectionManager
 
 
 router = APIRouter()
@@ -10,7 +9,7 @@ router = APIRouter()
 async def websocket_endpoint(
     websocket: WebSocket,
     client_id: str,
-    connection_mgr: ConnectionManager = Depends(MessageRepository),
+    manager: ConnectionManager = Depends(),
 ):
     await manager.connect(websocket, client_id)
     try:

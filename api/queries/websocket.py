@@ -36,7 +36,7 @@ class Packet(BaseModel):
 
 class ConnectionManager:
     def __init__(
-        self, message_repo: Depends(MessageRepository)
+        self, message_repo: MessageRepository = Depends()
     ):  # ! Why does this work?
         self.active_connections: List[WebSocket] = []
         self.active_users: List[str] = []
