@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from authenticator import authenticator
-from routers import accounts, messages, chatwebsocket
+from routers import accounts, messages, websocket
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -9,7 +9,7 @@ app = FastAPI()
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(messages.router)
-app.include_router(chatwebsocket.router)
+app.include_router(websocket.router)
 
 app.add_middleware(
     CORSMiddleware,

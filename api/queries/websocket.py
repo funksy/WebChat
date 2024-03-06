@@ -1,7 +1,7 @@
-from fastapi import WebSocket
+from fastapi import WebSocket, Depends
 from typing import List, Union
 from pydantic import BaseModel
-from queries.messages import MessageOut, MessageIn
+from queries.messages import MessageOut, MessageIn, MessageRepository
 
 
 class InitializationPayload(BaseModel):
@@ -35,7 +35,9 @@ class Packet(BaseModel):
 
 
 class ConnectionManager:
-    def __init__(self, message_repo):
+    def __init__(
+        self, message_repo: Depends(MessageRepository)
+    ):  # ! Why does this work?
         self.active_connections: List[WebSocket] = []
         self.active_users: List[str] = []
         self.message_repo = message_repo
@@ -45,12 +47,14 @@ class ConnectionManager:
         self.active_connections.append(websocket)
         self.active_users.append(user_id)
 
-        await self.direct_message(self.create_initialization_packet())
+        await self.direct_message(
+            websocket, self.create_initialization_packet()
+        )
         await self.broadcast(
             self.create_user_status_packet(user_id, "connect")
         )
 
-    async def disconnect(self, user_id: str, websocket: WebSocket):
+    async def disconnect(self, websocket: WebSocket, user_id: str):
         self.active_users.remove(user_id)
         self.active_connections.remove(websocket)
         await self.broadcast(
@@ -69,14 +73,20 @@ class ConnectionManager:
 
     def create_initialization_packet(self):
         messages = self.message_repo.get_room_message_list("1")["messages"]
-        payload = InitializationPayload(messages, self.active_users)
+        payload = InitializationPayload(
+            messages=messages, users=self.active_users
+        )
         return Packet(type="init", payload=payload)
 
     def create_user_status_packet(self, user_id: str, status: str):
-        payload = UserStatusPayload(user_id, status)
+        payload = UserStatusPayload(user_id=user_id, status=status)
         return Packet(type="user_status", payload=payload)
 
     def create_chat_message_packet(self, message: MessageIn):
-        new_message = self.message_repo.create_message(message)
-        payload = ChatMessagePayloadOut("new", new_message)
+        new_message = self.message_repo.create_message(MessageIn(**message))
+        payload = ChatMessagePayloadOut(action="new", message=new_message)
         return Packet(type="message", payload=payload)
+
+
+message_repo = MessageRepository()
+manager = ConnectionManager(message_repo)

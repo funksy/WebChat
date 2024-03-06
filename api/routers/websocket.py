@@ -1,0 +1,25 @@
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
+from queries.websocket import manager, ConnectionManager
+from queries.websocket import MessageRepository
+
+
+router = APIRouter()
+
+
+@router.websocket("/chat/{client_id}")
+async def websocket_endpoint(
+    websocket: WebSocket,
+    client_id: str,
+    connection_mgr: ConnectionManager = Depends(MessageRepository),
+):
+    await manager.connect(websocket, client_id)
+    try:
+        while True:
+            incoming_packet = await websocket.receive_json()
+            incoming_payload = incoming_packet["payload"]["message"]
+            outgoing_packet = manager.create_chat_message_packet(
+                incoming_payload
+            )
+            await manager.broadcast(outgoing_packet)
+    except WebSocketDisconnect:
+        manager.disconnect(websocket, client_id)
