@@ -1,15 +1,21 @@
 import Message from "./Message"
+import { useSelector } from "react-redux"
 
 const ChatBox = () => {
+    const messages = useSelector(
+        (state) => state.chatLog.messages
+    )
+    console.log(messages)
+
     return (
         <div className="chat-box flex-1 flex items-end bg-yellow-100 h-auto">
             <ul>
-                <Message/>
-                <Message/>
-                <Message/>
-                <Message/>
-                <Message/>
-                <Message/>
+                { messages.filter((message) => {
+                   return typeof message === 'object'
+                }).map(message => {
+                return (<Message key={message.id} message={message} />)
+                })
+                }
             </ul>
         </div>
     )

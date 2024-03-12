@@ -4,9 +4,10 @@ import { useGetTokenQuery } from '../store/apiSlice'
 import { useNavigate } from 'react-router-dom'
 import useWebSocket from 'react-use-websocket'
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initializeChatLog, addChatEntry } from '../store/chatLogSlice'
 import { initializeUsers, modifyUsersList } from '../store/activeUsersSlice'
+import { setMessageContent, pushButton } from '../store/chatInputSlice'
 
 
 const WS_HOST = import.meta.env.VITE_WS_HOST
@@ -18,6 +19,8 @@ const MainPage = () => {
     const [socketUrl, setSocketUrl] = useState('')
     const { readyState, lastJsonMessage, sendJsonMessage } = useWebSocket(socketUrl, {}, Boolean(socketUrl))
     const dispatch = useDispatch()
+    const messageInput = useSelector(state => state.chatInput.messageContent)
+    const buttonPress = useSelector(state => state.chatInput.submitButton)
 
     useEffect(() => {
         if (isSuccess && data !== null) {
@@ -39,7 +42,31 @@ const MainPage = () => {
             dispatch(addChatEntry(chatEntry))
             dispatch(modifyUsersList(newMessage.payload))
         }
+        if (newMessage && newMessage.type === 'message') {
+            console.log(newMessage.payload)
+            dispatch(addChatEntry(newMessage.payload.message))
+        }
     }, [lastJsonMessage])
+
+    useEffect(() => {
+        if (buttonPress) {
+            const newInputPacket = {
+                "type": "message",
+                "payload": {
+                    "action": "new",
+                    "message": {
+                        "user_id": data.account.username,
+                        "chatroom_id": "1",
+                        "content": messageInput
+                    }
+                }
+            }
+
+            sendJsonMessage(newInputPacket)
+            dispatch(setMessageContent(''))
+            dispatch(pushButton())
+        }
+    }, [buttonPress])
 
 
     return (

@@ -1,8 +1,8 @@
-const ChatUser = () => {
+const ChatUser = (props) => {
     return (
         <div className="chat-user">
             <li>
-                User
+                {props.user}
             </li>
         </div>
     )
