@@ -44,5 +44,6 @@ services:
             - ./ghi:/app
         environment:
             VITE_API_HOST: http://localhost:8000
+            VITE_WS_HOST: ws://localhost:8000
         ports:
             - "5173:5173"

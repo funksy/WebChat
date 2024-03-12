@@ -14,9 +14,7 @@ const LoginPage = () => {
     }
 
     useEffect(() => {
-        console.log(loginStatus)
         if (loginStatus.isSuccess) {
-            console.log('navigating to homepage')
             navigate('/')
         }
     }, [loginStatus])

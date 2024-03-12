@@ -26,7 +26,6 @@ const SignUpPage = () => {
         const response = await fetch(url, fetchConfig)
         if (response.ok) {
             const data = response.json()
-            console.log(data)
             navigate('/')
         }
     }

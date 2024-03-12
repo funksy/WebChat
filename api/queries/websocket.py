@@ -51,18 +51,20 @@ class ConnectionManager:
             websocket, self.create_initialization_packet()
         )
         await self.broadcast(
-            self.create_user_status_packet(user_id, "connect")
+            self.create_user_status_packet(user_id, "connect"), websocket
         )
 
     async def disconnect(self, websocket: WebSocket, user_id: str):
         self.active_users.remove(user_id)
         self.active_connections.remove(websocket)
         await self.broadcast(
-            self.create_user_status_packet(user_id, "disconnect")
+            self.create_user_status_packet(user_id, "disconnect"), websocket
         )
 
-    async def broadcast(self, packet: Packet):
+    async def broadcast(self, packet: Packet, websocket: WebSocket = None):
         for connection in self.active_connections:
+            if connection == websocket:
+                continue
             await connection.send_json(packet.json())
 
     async def direct_message(self, websocket: WebSocket, packet: Packet):
@@ -86,7 +88,3 @@ class ConnectionManager:
         new_message = self.message_repo.create_message(MessageIn(**message))
         payload = ChatMessagePayloadOut(action="new", message=new_message)
         return Packet(type="message", payload=payload)
-
-
-message_repo = MessageRepository()
-manager = ConnectionManager(message_repo)
