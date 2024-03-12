@@ -1,9 +1,7 @@
 const ChatUser = (props) => {
     return (
         <div className="chat-user">
-            <li>
-                {props.user}
-            </li>
+            <li>{props.user}</li>
         </div>
     )
 }

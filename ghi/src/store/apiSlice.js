@@ -45,8 +45,4 @@ export const chatApi = createApi({
     }),
 })
 
-export const {
-    useGetTokenQuery,
-    useLoginMutation,
-    useLogoutMutation
-} = chatApi
+export const { useGetTokenQuery, useLoginMutation, useLogoutMutation } = chatApi

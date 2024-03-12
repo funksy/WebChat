@@ -42,7 +42,9 @@ async def create_account(
         username=account_info.username, password=account_info.password
     )
     token = await authenticator.login(response, request, form, repo)
-    response.set_cookie(key="fastapi_token", httponly=True, value=token.access_token)
+    response.set_cookie(
+        key="fastapi_token", httponly=True, value=token.access_token
+    )
     return AccountToken(account=account, **token.dict())
 
 
@@ -54,7 +56,7 @@ def get_account_list(repo: AccountRepository = Depends()):
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: Account = Depends(authenticator.try_get_current_account_data)
+    account: Account = Depends(authenticator.try_get_current_account_data),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         return {

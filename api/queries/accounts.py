@@ -43,7 +43,9 @@ class AccountRepository(Queries):
     COLLECTION = "accounts"
 
     def get_account(self, username: str) -> AccountOut:
-        account = self.collection.find_one({"username": username}) # TODO error handling for no account
+        account = self.collection.find_one(
+            {"username": username}
+        )  # TODO error handling for no account
         account["id"] = str(account["_id"])
         del account["_id"]
         return Account(**account)

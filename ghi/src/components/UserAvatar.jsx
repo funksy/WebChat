@@ -1,7 +1,6 @@
 const UserAvatar = () => {
     return (
-
-            <img className="w-36 h-auto self-center" src="../assets/avatar.svg"/>
+        <img className="w-36 h-auto self-center" src="../assets/avatar.svg" />
     )
 }
 

@@ -9,18 +9,20 @@ import { initializeChatLog, addChatEntry } from '../store/chatLogSlice'
 import { initializeUsers, modifyUsersList } from '../store/activeUsersSlice'
 import { setMessageContent, pushButton } from '../store/chatInputSlice'
 
-
 const WS_HOST = import.meta.env.VITE_WS_HOST
-
 
 const MainPage = () => {
     const { data, isSuccess } = useGetTokenQuery()
     const navigate = useNavigate()
     const [socketUrl, setSocketUrl] = useState('')
-    const { readyState, lastJsonMessage, sendJsonMessage } = useWebSocket(socketUrl, {}, Boolean(socketUrl))
+    const { readyState, lastJsonMessage, sendJsonMessage } = useWebSocket(
+        socketUrl,
+        {},
+        Boolean(socketUrl)
+    )
     const dispatch = useDispatch()
-    const messageInput = useSelector(state => state.chatInput.messageContent)
-    const buttonPress = useSelector(state => state.chatInput.submitButton)
+    const messageInput = useSelector((state) => state.chatInput.messageContent)
+    const buttonPress = useSelector((state) => state.chatInput.submitButton)
 
     useEffect(() => {
         if (isSuccess && data !== null) {
@@ -30,20 +32,16 @@ const MainPage = () => {
 
     useEffect(() => {
         const newMessage = JSON.parse(lastJsonMessage)
-        console.log(newMessage)
         if (newMessage && newMessage.type === 'init') {
-            console.log(newMessage.payload)
             dispatch(initializeChatLog(newMessage.payload.messages))
             dispatch(initializeUsers(newMessage.payload.users))
         }
         if (newMessage && newMessage.type === 'user_status') {
-            console.log(newMessage.payload)
             const chatEntry = `${newMessage.payload.user_id} just ${newMessage.payload.status}ed`
             dispatch(addChatEntry(chatEntry))
             dispatch(modifyUsersList(newMessage.payload))
         }
         if (newMessage && newMessage.type === 'message') {
-            console.log(newMessage.payload)
             dispatch(addChatEntry(newMessage.payload.message))
         }
     }, [lastJsonMessage])
@@ -51,15 +49,15 @@ const MainPage = () => {
     useEffect(() => {
         if (buttonPress) {
             const newInputPacket = {
-                "type": "message",
-                "payload": {
-                    "action": "new",
-                    "message": {
-                        "user_id": data.account.username,
-                        "chatroom_id": "1",
-                        "content": messageInput
-                    }
-                }
+                type: 'message',
+                payload: {
+                    action: 'new',
+                    message: {
+                        user_id: data.account.username,
+                        chatroom_id: '1',
+                        content: messageInput,
+                    },
+                },
             }
 
             sendJsonMessage(newInputPacket)
@@ -67,7 +65,6 @@ const MainPage = () => {
             dispatch(pushButton())
         }
     }, [buttonPress])
-
 
     return (
         <div className="main-page flex flex-row min-h-[360px] h-dvh">

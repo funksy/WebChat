@@ -8,6 +8,7 @@ router = APIRouter()
 db_repo = MessageRepository()
 manager = ConnectionManager(db_repo)
 
+
 @router.websocket("/chat/{client_id}")
 async def websocket_endpoint(
     websocket: WebSocket,
