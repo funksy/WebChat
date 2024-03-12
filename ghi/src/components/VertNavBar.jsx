@@ -1,13 +1,13 @@
-import Logo from "./Logo"
-import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
+import Logo from './Logo'
+import { useGetTokenQuery } from '../store/apiSlice'
 
 const VertNavBar = () => {
-    const {token} = useAuthContext();
+    const { data } = useGetTokenQuery()
 
     return (
         <div className="vert-nav-bar flex flex-col bg-cyan-500 flex-none basis-44 h-full">
-            <Logo/>
-            {token && <p>Logged in user</p>}
+            <Logo />
+            {data && <p>Logged in as {data.account.username}</p>}
         </div>
     )
 }
