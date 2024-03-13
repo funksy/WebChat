@@ -6,6 +6,7 @@ const LoginPage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [login, loginStatus] = useLoginMutation()
+    const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
@@ -14,6 +15,9 @@ const LoginPage = () => {
     }
 
     useEffect(() => {
+        if (loginStatus.isError) {
+            setErrorMessage(loginStatus.error.data.detail)
+        }
         if (loginStatus.isSuccess) {
             navigate('/')
         }
@@ -22,6 +26,7 @@ const LoginPage = () => {
     return (
         <div>
             <h1>Login</h1>
+            {errorMessage && <h2>{errorMessage}</h2>}
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="username">Username</label>
                 <input

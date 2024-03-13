@@ -1,38 +1,39 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSignupMutation } from '../store/apiSlice'
 
-const API_HOST = import.meta.env.VITE_API_HOST
+
 
 const SignUpPage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConf, setPasswordConf] = useState('')
     const navigate = useNavigate()
-
-    const handleSubmit = async (e) => {
+    const [signup, signupStatus] = useSignupMutation()
+    const [errorMessage, setErrorMessage] = useState('')
+    const handleSubmit = (e) => {
         e.preventDefault()
-
-        if (password !== passwordConf) {
-            return
+        if (password !== passwordConf){
+            setErrorMessage('Passwords Do Not Match')
         }
+        else {
+        signup({ username: username, password: password })}
+    }
 
-        const url = `${API_HOST}/accounts`
-        const fetchConfig = {
-            method: 'POST',
-            body: JSON.stringify({ username, password }),
-            headers: { 'content-type': 'application/json' },
+    useEffect(() => {
+        if (signupStatus.isError) {
+            setErrorMessage(signupStatus.error.data.detail)
         }
-
-        const response = await fetch(url, fetchConfig)
-        if (response.ok) {
-            const data = response.json()
+        if (signupStatus.isSuccess) {
             navigate('/')
         }
-    }
+    }, [signupStatus])
+
 
     return (
         <div>
             <h1>Sign Up</h1>
+            {errorMessage && <h2>{errorMessage}</h2>}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input

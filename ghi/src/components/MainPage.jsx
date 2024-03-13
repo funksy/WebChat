@@ -15,7 +15,7 @@ const MainPage = () => {
     const { data, isSuccess } = useGetTokenQuery()
     const navigate = useNavigate()
     const [socketUrl, setSocketUrl] = useState('')
-    const { readyState, lastJsonMessage, sendJsonMessage } = useWebSocket(
+    const { lastJsonMessage, sendJsonMessage } = useWebSocket(
         socketUrl,
         {},
         Boolean(socketUrl)
@@ -25,6 +25,10 @@ const MainPage = () => {
     const buttonPress = useSelector((state) => state.chatInput.submitButton)
 
     useEffect(() => {
+        if (isSuccess && data === null){
+            navigate('/login')
+        }
+
         if (isSuccess && data !== null) {
             setSocketUrl(`${WS_HOST}/chat/${data.account.username}`)
         }

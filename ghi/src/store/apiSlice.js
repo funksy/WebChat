@@ -42,7 +42,17 @@ export const chatApi = createApi({
             },
             invalidatesTags: ['Account'],
         }),
+        signup: builder.mutation({
+            query: (info) => {
+                return {
+                    url: '/accounts',
+                    body: info,
+                    method: 'post'
+                }
+            },
+            invalidatesTags: ['Account'],
+        }),
     }),
 })
 
-export const { useGetTokenQuery, useLoginMutation, useLogoutMutation } = chatApi
+export const { useGetTokenQuery, useLoginMutation, useLogoutMutation, useSignupMutation } = chatApi
