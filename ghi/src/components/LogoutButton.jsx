@@ -22,8 +22,8 @@ const LogoutButton = () => {
     }, [logoutStatus])
 
     return (
-        <div className="logout-button h-10 w-auto bg-pink-700">
-            <button onClick={handleClick}>Logout</button>
+        <div className="logout-button text-xl font-bold flex h-10 w-auto justify-center">
+            <button className="button-item border-2 px-3 rounded bg-red-500" onClick={handleClick}>Log Out</button>
         </div>
     )
 }

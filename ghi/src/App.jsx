@@ -28,7 +28,7 @@ if (!API_HOST) {
 function App() {
     return (
         <BrowserRouter>
-            <div className="main-page flex flex-row min-h-[360px] h-dvh">
+            <div className="main-page flex flex-row min-h-[360px] h-dvh font-tw text-lg">
                 <VertNavBar />
                 <Routes>
                     <Route path="/" element={<MainPage />} />

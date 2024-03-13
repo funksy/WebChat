@@ -71,7 +71,7 @@ const MainPage = () => {
     }, [buttonPress])
 
     return (
-        <div className="main-page flex flex-row min-h-[360px] h-dvh">
+        <div className="main-page flex flex-row min-h-[360px] w-dvw h-dvh">
             <MainContent />
             <SideBar />
         </div>
