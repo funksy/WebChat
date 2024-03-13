@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSignupMutation } from '../store/apiSlice'
-
-
+import { useGetTokenQuery } from '../store/apiSlice'
 
 const SignUpPage = () => {
     const [username, setUsername] = useState('')
@@ -11,24 +10,27 @@ const SignUpPage = () => {
     const navigate = useNavigate()
     const [signup, signupStatus] = useSignupMutation()
     const [errorMessage, setErrorMessage] = useState('')
+    const { data, isSuccess } = useGetTokenQuery()
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (password !== passwordConf){
+        if (password !== passwordConf) {
             setErrorMessage('Passwords Do Not Match')
+        } else {
+            signup({ username: username, password: password })
         }
-        else {
-        signup({ username: username, password: password })}
     }
 
     useEffect(() => {
         if (signupStatus.isError) {
             setErrorMessage(signupStatus.error.data.detail)
         }
-        if (signupStatus.isSuccess) {
-            navigate('/')
-        }
     }, [signupStatus])
 
+    useEffect(() => {
+        if (isSuccess && data !== null) {
+            navigate('/')
+        }
+    }, [data, isSuccess])
 
     return (
         <div>

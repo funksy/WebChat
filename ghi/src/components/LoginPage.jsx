@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../store/apiSlice'
+import { useGetTokenQuery } from '../store/apiSlice'
 
 const LoginPage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const { data, isSuccess } = useGetTokenQuery()
     const [login, loginStatus] = useLoginMutation()
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
@@ -18,10 +20,13 @@ const LoginPage = () => {
         if (loginStatus.isError) {
             setErrorMessage(loginStatus.error.data.detail)
         }
-        if (loginStatus.isSuccess) {
+    }, [loginStatus])
+
+    useEffect(() => {
+        if (isSuccess && data !== null) {
             navigate('/')
         }
-    }, [loginStatus])
+    }, [data, isSuccess])
 
     return (
         <div>

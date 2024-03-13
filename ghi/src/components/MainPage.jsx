@@ -25,7 +25,7 @@ const MainPage = () => {
     const buttonPress = useSelector((state) => state.chatInput.submitButton)
 
     useEffect(() => {
-        if (isSuccess && data === null){
+        if (isSuccess && data === null) {
             navigate('/login')
         }
 
