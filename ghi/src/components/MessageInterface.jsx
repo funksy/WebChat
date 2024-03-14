@@ -3,7 +3,7 @@ import MessageSubmit from './MessageSubmit'
 
 const MessageInterface = () => {
     return (
-        <div className="message-interface flex flex-0 h-20 border-t-2 border-custom-db">
+        <div className="message-interface flex flex-0 h-20 border-custom-db">
             <MessageInput />
             <MessageSubmit />
         </div>

@@ -7,7 +7,7 @@ const MessageInput = () => {
     return (
         <div className="message-input flex flex-1 h-full w-full">
             <textarea
-                className="m-2 resize-none rounded text-wrap p-2 w-full placeholder-custom-db bg-custom-mauve"
+                className="m-2 resize-none rounded text-wrap p-2 w-full placeholder-custom-db text-custom-db bg-custom-mauve shadow-[0_2px_4px_0] shadow-black"
                 value={content}
                 placeholder="Type your message here..."
                 onChange={(e) => dispatch(setMessageContent(e.target.value))}
