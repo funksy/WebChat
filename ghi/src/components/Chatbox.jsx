@@ -1,11 +1,19 @@
 import Message from './Message'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const ChatBox = () => {
     const messages = useSelector((state) => state.chatLog.messages)
+    const messageListElem = document.getElementById('message-list')
+
+    useEffect(() => {
+        if (messages.length) {
+            messageListElem.lastChild.scrollIntoView()
+        }
+    }, [messages])
 
     return (
-        <div className="chat-box p-2 flex-1 flex flex-wrap items-end overflow-auto h-auto">
+        <div className="chat-box p-2 flex-1 flex flex-wrap items-end overflow-auto h-auto scroll-smooth">
             <ul id="message-list" className="messages flex-1 grid">
                 {messages
                     .filter((message) => {
