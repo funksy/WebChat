@@ -38,14 +38,15 @@ class ConnectionManager:
     def __init__(
         self, message_repo: MessageRepository = Depends()
     ):  # ! Why does this work?
-        self.active_connections: List[WebSocket] = []
-        self.active_users: List[str] = []
         self.message_repo = message_repo
+
+    active_connections: List[WebSocket] = []
+    active_users: List[str] = []
 
     async def connect(self, websocket: WebSocket, user_id: str):
         await websocket.accept()
-        self.active_connections.append(websocket)
-        self.active_users.append(user_id)
+        ConnectionManager.active_connections.append(websocket)
+        ConnectionManager.active_users.append(user_id)
 
         await self.direct_message(
             websocket, self.create_initialization_packet()
@@ -55,8 +56,8 @@ class ConnectionManager:
         )
 
     async def disconnect(self, websocket: WebSocket, user_id: str):
-        self.active_users.remove(user_id)
-        self.active_connections.remove(websocket)
+        ConnectionManager.active_users.remove(user_id)
+        ConnectionManager.active_connections.remove(websocket)
         await self.broadcast(
             self.create_user_status_packet(user_id, "disconnect"), websocket
         )

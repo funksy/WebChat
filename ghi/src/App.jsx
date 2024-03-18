@@ -28,7 +28,7 @@ if (!API_HOST) {
 function App() {
     return (
         <BrowserRouter>
-            <div className="main-page flex flex-row min-h-[360px] h-dvh font-tw text-lg bg-[url('https://img.freepik.com/premium-vector/abstract-seamless-pattern-background_290875-132.jpg')] bg-repeat bg-[length:250px_250px]">
+            <div className="main-page flex flex-row min-h-[360px] h-dvh font-pop text-lg bg-[url('https://img.freepik.com/premium-vector/abstract-seamless-pattern-background_290875-132.jpg')] bg-repeat bg-[length:250px_250px]">
                 <VertNavBar />
                 <Routes>
                     <Route path="/" element={<MainPage />} />

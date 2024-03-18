@@ -9,6 +9,7 @@ const ChatBox = () => {
     useEffect(() => {
         if (messages.length) {
             messageListElem.lastChild.scrollIntoView()
+            messageListElem.lastChild.lastChild.style.visibility = 'visible'
         }
     }, [messages])
 

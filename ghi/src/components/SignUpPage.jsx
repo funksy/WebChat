@@ -33,7 +33,7 @@ const SignUpPage = () => {
     }, [data, isSuccess])
 
     return (
-        <div className="flex w-full flex-col text-white text-xl items-center justify-center px-6 py-8 bg-black bg-opacity-35">
+        <div className="flex w-full flex-col text-white text-xl items-center justify-center px-6 py-8 bg-custom-lb bg-opacity-35">
             <div className="flex flex-col gap-6 rounded-2xl bg-custom-db bg-opacity-75 p-10 px-20 shadow-[0_2px_4px_0] shadow-black w-[480px]">
                 <h1 className="text-2xl text-center font-bold">
                     Sign up for an account

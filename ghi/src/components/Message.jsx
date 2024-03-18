@@ -18,14 +18,20 @@ const Message = (props) => {
 
     if (!props.isFirst) {
         return (
+        <>
             <li
-                className={`p-2 mx-[40px] my-[3px] text-wrap rounded-xl break-all shadow-[0_2px_4px_0] shadow-black ${isCurrentUser
-                        ? 'bg-custom-gold justify-self-end text-custom-db bg-opacity-85'
-                        : 'bg-custom-lb justify-self-start text-white'
-                    }`}
+                className={`mx-[40px] my-[3px] flex ${isCurrentUser ? 'justify-self-end flex-row-reverse' : 'justify-self-start'}`}
             >
+                <div className={`peer p-2 rounded-xl shadow-[0_2px_4px_0] shadow-black ${isCurrentUser
+                        ? 'bg-custom-gold text-custom-db bg-opacity-85'
+                        : 'bg-custom-lb text-white'
+                    }`}>
                 {props.message.content}
+                </div>
+                <div className={`invisible peer-hover:visible text-[0.6rem] place-self-end min-w-fit break-keep italic mx-2 `}>{new Date(props.message.timestamp).toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" })}</div>
             </li>
+        </>
+            
         )
     } else {
         return (
@@ -36,7 +42,7 @@ const Message = (props) => {
                             : 'justify-self-start'
                         }`}
                 >
-                    <img style={{backgroundColor: color}} className="inline rounded-2xl shadow-[0_2px_4px_0] shadow-black" src="../../assets/robot-message-icon.svg" width="35px" />
+                    <img style={{backgroundColor: color}} className="inline bg-[length:20px_20px] rounded-2xl shadow-[0_2px_4px_0] shadow-black" src="../../assets/robot-message-icon.svg" width="35px" />
                     <span
                         className={`mx-2 font-bold text-lg text-custom-db truncate ${isCurrentUser
                                 ? 'justify-self-end ml-[35px]'
@@ -47,12 +53,15 @@ const Message = (props) => {
                     </span>
                 </div>
                 <li
-                    className={`p-2 mx-[40px] my-[3px] text-wrap rounded-xl break-all shadow-[0_2px_4px_0] shadow-black ${isCurrentUser
-                            ? 'bg-custom-gold justify-self-end text-custom-db bg-opacity-85'
-                            : 'bg-custom-lb justify-self-start text-white'
-                        }`}
+                    className={`mx-[40px] my-[3px] flex ${isCurrentUser ? 'justify-self-end flex-row-reverse' : 'justify-self-start'}`}
                 >
+                    <div className={`peer p-2 rounded-xl shadow-[0_2px_4px_0] shadow-black ${isCurrentUser
+                            ? 'bg-custom-gold text-custom-db bg-opacity-85'
+                            : 'bg-custom-lb text-white'
+                        }`}>
                     {props.message.content}
+                    </div>
+                    <div className={`invisible peer-hover:visible text-[0.6rem] place-self-end min-w-fit break-keep italic mx-2 `}>{new Date(props.message.timestamp).toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" })}</div>
                 </li>
             </>
         )

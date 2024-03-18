@@ -6,7 +6,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                tw: ['Titillium Web'],
+                pop: ['Odibee Sans']
             },
             colors: {
                 custom: {
