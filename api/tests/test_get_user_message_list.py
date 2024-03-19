@@ -15,22 +15,19 @@ class MockMessageRepository:
         return {"messages": []}
 
 
-
 def test_get_user_message_list():
-    #arrange
+    # arrange
     app.dependency_overrides[MessageRepository] = MockMessageRepository
     app.dependency_overrides[authenticator.get_current_account_data] = (
         fake_get_current_account_data
     )
 
-    #act
+    # act
     res = client.get("/account/{user_id}/messages")
 
-    #assert
+    # assert
     assert res.status_code == 200
-    assert res.json() == {
-        'messages': []
-    }
+    assert res.json() == {"messages": []}
 
-    #cleanup
+    # cleanup
     app.dependency_overrides = {}

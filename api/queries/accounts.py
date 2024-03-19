@@ -43,9 +43,7 @@ class AccountRepository(Queries):
     COLLECTION = "accounts"
 
     def get_account(self, username: str) -> AccountOut:
-        account = self.collection.find_one(
-            {"username": username}
-        )
+        account = self.collection.find_one({"username": username})
         if not account:
             return account
         account["id"] = str(account["_id"])
