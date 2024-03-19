@@ -41,9 +41,10 @@ const MainPage = () => {
             dispatch(initializeUsers(newMessage.payload.users))
         }
         if (newMessage && newMessage.type === 'user_status') {
-            const chatEntry = `${newMessage.payload.user_id} just ${newMessage.payload.status}ed`
-            dispatch(addChatEntry(chatEntry))
-            dispatch(modifyUsersList(newMessage.payload))
+            // const chatEntry = `${newMessage.payload.user_id} just ${newMessage.payload.status}ed`
+            // dispatch(addChatEntry(chatEntry))
+            // dispatch(modifyUsersList(newMessage.payload))
+            return
         }
         if (newMessage && newMessage.type === 'message') {
             dispatch(addChatEntry(newMessage.payload.message))
