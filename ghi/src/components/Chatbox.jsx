@@ -14,7 +14,7 @@ const ChatBox = () => {
     }, [messages])
 
     return (
-        <div className="chat-box p-2 flex-1 flex flex-wrap items-end overflow-auto h-auto scroll-smooth">
+        <div className="chat-box p-2 flex-1 flex flex-wrap items-end overflow-auto h-full scroll-smooth">
             <ul id="message-list" className="messages flex-1 grid">
                 {messages.map((message, idx) => {
                     if (
