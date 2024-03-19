@@ -52,3 +52,12 @@ class MessageRepository(Queries):
         new_message["id"] = str(new_message["_id"])
         del new_message["_id"]
         return new_message
+
+    def get_user_message_list(self, user_id: str) -> MessageListOut:
+        messages = []
+        db_cursor = self.collection.find({"user_id": user_id})
+        for message in db_cursor:
+            message["id"] = str(message["_id"])
+            del message["_id"]
+            messages.append(message)
+        return {"messages": messages}

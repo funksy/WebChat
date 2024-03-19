@@ -56,3 +56,16 @@ def get_message(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_message(id)
+
+
+@router.get(
+    "/account/{user_id}/messages",
+    response_model=MessageListOut | HttpError,
+    tags=["messages"],
+)
+def get_user_message_list(
+    user_id: str,
+    repo: MessageRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return repo.get_user_message_list(user_id)
