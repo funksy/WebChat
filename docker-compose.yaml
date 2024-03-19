@@ -26,7 +26,7 @@ services:
             DB_NAME: chat_db
             SIGNING_KEY: elbp36dem3opvjxm8rb3kdgd
         build:
-            context: api6
+            context: api
             dockerfile: Dockerfile.dev
         ports:
             - 8000:8000
