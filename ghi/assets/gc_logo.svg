@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="327.56366"
+   height="141.10336"
+   viewBox="0 0 327.56366 141.10336"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient45">
+      <stop
+         style="stop-color:#ffffd8;stop-opacity:1;"
+         offset="0"
+         id="stop45" />
+      <stop
+         style="stop-color:#025e73;stop-opacity:0.29535753;"
+         offset="1"
+         id="stop46" />
+    </linearGradient>
+    <linearGradient
+       id="swatch43">
+      <stop
+         style="stop-color:#025e73;stop-opacity:1;"
+         offset="0"
+         id="stop44" />
+    </linearGradient>
+    <rect
+       x="618.06726"
+       y="396.5112"
+       width="211.01794"
+       height="68.796379"
+       id="rect5" />
+    <rect
+       x="304.98206"
+       y="291.00449"
+       width="161.70403"
+       height="85.444443"
+       id="rect4" />
+    <radialGradient
+       xlink:href="#linearGradient45"
+       id="radialGradient46"
+       cx="471.26352"
+       cy="370.43137"
+       fx="471.26352"
+       fy="370.43137"
+       r="55.876774"
+       gradientTransform="matrix(0.93960545,0,0,1.1863717,67.059382,-92.134979)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-281.74005,-299.87958)">
+    <text
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:184.568px;line-height:1.25;font-family:'Bitstream Charter';-inkscape-font-specification:'Bitstream Charter, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:baseline;white-space:pre;fill:#e7ac35;fill-opacity:1;stroke:url(#radialGradient46);stroke-width:4.4293;stroke-dasharray:none;stroke-opacity:1"
+       x="451.64304"
+       y="409.24738"
+       id="text2"
+       transform="scale(0.9376482,1.0664981)">C</text>
+    <text
+       xml:space="preserve"
+       id="text4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans, Normal';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;white-space:pre;shape-inside:url(#rect4);shape-padding:0;shape-margin:0;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:#025e73;stroke-width:0.96;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.294118;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       transform="translate(-23.725922,8.6048766)"><tspan
+         x="304.98242"
+         y="338.25983"
+         id="tspan1">generi</tspan></text>
+    <text
+       xml:space="preserve"
+       id="text5"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans, Normal';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;white-space:pre;shape-inside:url(#rect5);shape-padding:0;shape-margin:0;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:#025e73;stroke-width:0.96;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.294118;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       transform="translate(-86.013452,-16.061261)"><tspan
+         x="618.06641"
+         y="443.76764"
+         id="tspan2">hat</tspan></text>
+  </g>
+</svg>
