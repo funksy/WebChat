@@ -1,6 +1,5 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
 from queries.websocket import ConnectionManager
-from authenticator import authenticator
 
 
 router = APIRouter()
