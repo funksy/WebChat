@@ -44,41 +44,43 @@ build-api-image:
         - main
 
 # # Build the React/JavaScript front-end
-# build-front-end-job:
-#   stage: build
-#   image: node:lts-bullseye
-#   needs:
-#     - tests
-#   variables:
-#     # If either of these variables is defined in the GitLab
-#     # CI/CD variables, that value will override the value here.
-#     # You need to substitute in your real values for
-#     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-#     # Don't forget to also replace PROJECT NAME in the npm run build line as well
-#     VITE_API_HOST: https://DEPLOYED_API_SERVICE.mod3projects.com
-#   script:
-#     - cd ghi
-#     - npm install
-#     - npm run lint
-#     - npm run build -- --base=/PROJECT_NAME/
-#     The following line creates a _redirects file to redirect all URLs to index.html
-#     Documentation: https://docs.gitlab.com/ee/user/project/pages/redirects.html#rewrite-all-requests-to-a-root-indexhtml
-#     - echo "/* /index.html 200" > dist/_redirects
-#   artifacts:
-#     paths:
-#       - ghi/dist/
+build-front-end-job:
+    stage: build
+    image: node:lts-bullseye
+    needs:
+        - tests
+    variables:
+        # If either of these variables is defined in the GitLab
+        # CI/CD variables, that value will override the value here.
+        # You need to substitute in your real values for
+        # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
+        # Don't forget to also replace PROJECT NAME in the npm run build line as well
+        PUBLIC_URL: https://the-furious-five.gitlab.io/generichat/
+        VITE_API_HOST: https://nov-2023-5-api.mod3projects.com/
+        VITE_WS_HOST: wss://nov-2023-5-api.mod3projects.com/
+    script:
+        - cd ghi
+        - npm install
+        - npm run lint
+        - npm run build -- --base=/PROJECT_NAME/
+        #The following line creates a _redirects file to redirect all URLs to index.html
+        Documentation: https://docs.gitlab.com/ee/user/project/pages/redirects.html#rewrite-all-requests-to-a-root-indexhtml
+        - echo "/* /index.html 200" > dist/_redirects
+    artifacts:
+        paths:
+        - ghi/dist/
 
 # # Deploy the React/JavaScript front-end to GitLab pages
-# pages:
-#   stage: deploy
-#   rules:
-#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-#   dependencies:
-#     - build-front-end-job
-#   needs:
-#     - build-front-end-job
-#   script:
-#     - mv ghi/dist/ public
-#   artifacts:
-#     paths:
-#       - public
+pages:
+    stage: deploy
+    rules:
+        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    dependencies:
+        - build-front-end-job
+    needs:
+        - build-front-end-job
+    script:
+        - mv ghi/dist/ public
+    artifacts:
+        paths:
+        - public
