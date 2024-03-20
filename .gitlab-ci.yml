@@ -19,10 +19,10 @@ tests:
         - pip install -r requirements.txt
         - python -m pytest
     variables:
-        CORS_HOST: 'placeholder'
-        DB_URL: 'placeholder'
-        DB_NAME: 'placeholder'
-        SIGNING_KEY: 'placeholder'
+        CORS_HOST: "placeholder"
+        DB_URL: "placeholder"
+        DB_NAME: "placeholder"
+        SIGNING_KEY: "placeholder"
 # # Build API Image:
 # # This job builds the API docker image and pushes it to the GitLab docker registry
 # # When this job finishes you will need to use the glv-cloud-cli reset command
@@ -55,20 +55,20 @@ build-front-end-job:
         # You need to substitute in your real values for
         # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
         # Don't forget to also replace PROJECT NAME in the npm run build line as well
-        PUBLIC_URL: https://the-furious-five.gitlab.io/generichat/
+        PUBLIC_URL: https://the-furious-five.gitlab.io/module-3-chat/
         VITE_API_HOST: https://nov-2023-5-api.mod3projects.com/
         VITE_WS_HOST: wss://nov-2023-5-api.mod3projects.com/
     script:
         - cd ghi
         - npm install
         - npm run lint
-        - npm run build -- --base=/generichat/
+        - npm run build -- --base=/module-3-chat/
         # The following line creates a _redirects file to redirect all URLs to index.html
         # Documentation: https://docs.gitlab.com/ee/user/project/pages/redirects.html#rewrite-all-requests-to-a-root-indexhtml
-        # - echo "/* /index.html 200" > dist/_redirects
+        - echo "/* /index.html 200" > dist/_redirects
     artifacts:
         paths:
-        - ghi/dist/
+            - ghi/dist/
 
 # # Deploy the React/JavaScript front-end to GitLab pages
 pages:
@@ -83,4 +83,4 @@ pages:
         - mv ghi/dist/ public
     artifacts:
         paths:
-        - public
+            - public
