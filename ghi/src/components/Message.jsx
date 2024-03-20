@@ -1,23 +1,23 @@
 import { useGetTokenQuery } from '../store/apiSlice'
 
 const getColorFromId = (str) => {
-    let sum = 0
-    for (let i = 0; i < str.length; i++) {
-        sum += str.charCodeAt(i)
-    }
-    const r = sum % 256
-    const g = (sum * 10) % 256
-    const b = (sum * 59) % 256
-    return `rgb(${r}, ${g}, ${b})`
+  let sum = 0
+  for (let i = 0; i < str.length; i++) {
+    sum += str.charCodeAt(i)
+  }
+  const r = sum % 256
+  const g = (sum * 10) % 256
+  const b = (sum * 59) % 256
+  return `rgb(${r}, ${g}, ${b})`
 }
 
 const Message = (props) => {
-    const { data } = useGetTokenQuery()
-    const isCurrentUser = props.message.user_id === data.account.username
-    const color = getColorFromId(props.message.user_id)
+  const { data } = useGetTokenQuery()
+  const isCurrentUser = props.message.user_id === data.account.username
+  const color = getColorFromId(props.message.user_id)
 
-    if (!props.isFirst) {
-        return (
+  if (!props.isFirst) {
+    return (
             <>
                 <li
                     className={`mx-[40px] my-[3px] flex ${
@@ -36,18 +36,18 @@ const Message = (props) => {
                         {props.message.content}
                     </div>
                     <div
-                        className={`invisible peer-hover:visible text-[0.6rem] place-self-end min-w-fit break-keep italic mx-2 `}
+                        className={'invisible peer-hover:visible text-[0.6rem] place-self-end min-w-fit break-keep italic mx-2 '}
                     >
                         {new Date(props.message.timestamp).toLocaleTimeString(
-                            'en-US',
-                            { hour: '2-digit', minute: '2-digit' }
+                          'en-US',
+                          { hour: '2-digit', minute: '2-digit' }
                         )}
                     </div>
                 </li>
             </>
-        )
-    } else {
-        return (
+    )
+  } else {
+    return (
             <>
                 <div
                     className={`mt-4 font-bold flex text-lg text-custom-db items-center ${
@@ -89,17 +89,17 @@ const Message = (props) => {
                         {props.message.content}
                     </div>
                     <div
-                        className={`invisible peer-hover:visible text-[0.6rem] place-self-end min-w-fit break-keep italic mx-2 `}
+                        className={'invisible peer-hover:visible text-[0.6rem] place-self-end min-w-fit break-keep italic mx-2 '}
                     >
                         {new Date(props.message.timestamp).toLocaleTimeString(
-                            'en-US',
-                            { hour: '2-digit', minute: '2-digit' }
+                          'en-US',
+                          { hour: '2-digit', minute: '2-digit' }
                         )}
                     </div>
                 </li>
             </>
-        )
-    }
+    )
+  }
 }
 
 export default Message

@@ -1,38 +1,37 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSignupMutation } from '../store/apiSlice'
-import { useGetTokenQuery } from '../store/apiSlice'
+import { useSignupMutation, useGetTokenQuery } from '../store/apiSlice'
 
 const SignUpPage = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConf, setPasswordConf] = useState('')
-    const navigate = useNavigate()
-    const [signup, signupStatus] = useSignupMutation()
-    const [errorMessage, setErrorMessage] = useState('')
-    const { data, isSuccess } = useGetTokenQuery()
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (password !== passwordConf) {
-            setErrorMessage('Passwords Do Not Match')
-        } else {
-            signup({ username: username, password: password })
-        }
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConf, setPasswordConf] = useState('')
+  const navigate = useNavigate()
+  const [signup, signupStatus] = useSignupMutation()
+  const [errorMessage, setErrorMessage] = useState('')
+  const { data, isSuccess } = useGetTokenQuery()
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (password !== passwordConf) {
+      setErrorMessage('Passwords Do Not Match')
+    } else {
+      signup({ username, password })
     }
+  }
 
-    useEffect(() => {
-        if (signupStatus.isError) {
-            setErrorMessage(signupStatus.error.data.detail)
-        }
-    }, [signupStatus])
+  useEffect(() => {
+    if (signupStatus.isError) {
+      setErrorMessage(signupStatus.error.data.detail)
+    }
+  }, [signupStatus])
 
-    useEffect(() => {
-        if (isSuccess && data !== null) {
-            navigate('/')
-        }
-    }, [data, isSuccess])
+  useEffect(() => {
+    if (isSuccess && data !== null) {
+      navigate('/')
+    }
+  }, [data, isSuccess])
 
-    return (
+  return (
         <div className="flex w-full flex-col text-white text-xl items-center justify-center px-6 py-8 bg-custom-lb bg-opacity-35">
             <div className="flex flex-col gap-6 rounded-2xl bg-custom-db bg-opacity-75 p-10 px-20 shadow-[0_2px_4px_0] shadow-black w-[480px]">
                 <h1 className="text-2xl text-center font-bold">
@@ -64,7 +63,6 @@ const SignUpPage = () => {
                             required
                             className="p-2 w-full bg-custom-mauve shadow-[0_2px_4px_0] shadow-black rounded placeholder-custom-db text-custom-db"
                             placeholder="Password"
-
                         />
                     </div>
                     <div>
@@ -84,7 +82,7 @@ const SignUpPage = () => {
                         Sign up
                     </button>
                     <p className="text-sm text-center mt-4">
-                        If you already have an account,{' '}
+                        {'If you already have an account, '}
                         <button
                             className="text-custom-gold"
                             onClick={() => navigate('/login')}
@@ -95,7 +93,7 @@ const SignUpPage = () => {
                 </form>
             </div>
         </div>
-    )
+  )
 }
 
 export default SignUpPage

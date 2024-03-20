@@ -1,9 +1,9 @@
 import { useGetTokenQuery } from '../store/apiSlice'
 
 const UserAvatar = () => {
-    const { data } = useGetTokenQuery()
+  const { data } = useGetTokenQuery()
 
-    return (
+  return (
         <div className="flex flex-0 flex-col">
             <div className="text-white w-full mt-4  font-bold">
                 <p className="text-center truncate">
@@ -15,7 +15,7 @@ const UserAvatar = () => {
                 src="../assets/robot-message-icon.svg"
             />
         </div>
-    )
+  )
 }
 
 export default UserAvatar
