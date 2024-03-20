@@ -71,6 +71,11 @@ const MainPage = () => {
         }
     }, [buttonPress])
 
+    useEffect(() => {
+        console.log('socketUrl:', socketUrl)
+        console.log('WS_HOST, ', WS_HOST)
+    }, [socketUrl])
+
     return (
         <div className="main-page flex flex-row min-h-[360px] w-dvw h-dvh">
             <MainContent />
