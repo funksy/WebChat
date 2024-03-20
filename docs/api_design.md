@@ -1,259 +1,201 @@
 ## AUTHENTICATION
 
-Authentication is performed using the hack reactor provided JWTDown authentication module. When a user creates an account from the signup page they are issued a Json Web Token that allows them to access the chat application and is used by the application for several purposes including authorization for the user to accesses the app provided websocket connections that are used for real-time chat functionality. The api uses the following endpoints to implement user authentication.
+Authentication is performed using the hack reactor provided JWTDown authentication module. When a user creates an account from the signup page they are issued a JSON Web Token that allows them to access the chat application and is used by the application for several purposes, including authorization for the user to access the page that initializes the websocket connections that are used for real-time chat functionality. The API uses the following endpoints to implement user authentication.
+
 ### Log in
-* Endpoint path: /token
-* Endpoint method: POST
-* Request shape (form):
-  * username: string
-  * password: string
-* Response: Account information and a token
-* Response shape (JSON):
+
+-   Endpoint path: /token
+-   Endpoint method: POST
+-   Request shape (form):
+    -   username: string
+    -   password: string
+-   Response: Account information and a token
+-   Response shape (JSON):
     ```json
     {
-      "account": {
-        key: type,
-      },
-      "token": string
+        "access_token": "string",
+        "token_type": "Bearer"
     }
     ```
 
 ### Log out
-* Endpoint path: /token
-* Endpoint method: DELETE
-* Headers:
-  * Authorization: Bearer token
-* Response: Always true
-* Response shape (JSON):
+
+-   Endpoint path: /token
+-   Endpoint method: DELETE
+-   Headers:
+    -   Authorization: Bearer token
+-   Response: "true" if successful
+-   Response shape (JSON):
     ```json
     true
     ```
 
-### Sign-up
-* Endpoint path: /Signup
-* Endpoint method: POST
-* Headers:
-* N/A
-* Request shape (JSON):
+### Get Token
+
+-   Endpoint path: /token
+-   Endpoint method: GET
+-   Headers:
+    -   Authorization: Bearer token
+-   Response: Token and account information
+-   Response shape (JSON):
     ```json
     {
-      "username": string,
-      "password": string
-    }
-    ```
-* Response: an indication of success or failure
-* Response shape:
-    ```json
-    {
-      "success": boolean
+        "access_token": "string",
+        "token_type": "Bearer",
+        "account": {
+            "id": "string",
+            "username": "string"
+        }
     }
     ```
 
 ## USER MANAGEMENT
+
 The following endpoints are used to manage user accounts.
-### List of users
-* Endpoint path: /users
-* Endpoint method: GET
-* Query parameters:
-  * N/A
-* Headers:
-  * Authorization: Bearer token
-* Request shape (JSON):
-  * N/A
-* Response: List of users
-* Response shape (JSON):
-     ```json
+
+### Get Account List
+
+-   Endpoint path: /accounts
+-   Endpoint method: GET
+-   Headers:
+    -   N/A
+-   Request shape (JSON):
+    -   N/A
+-   Response: List of accounts
+-   Response shape (JSON):
+    ```json
     {
-      "users": [
-        {
-          "_id": string,
-          "username": string,
-          "avatar_url": string,
+        "accounts": [
+            {
+                "id": "string",
+                "username": "string"
+            }
+        ]
+    }
+    ```
+
+### Create Account
+
+-   Endpoint path: /accounts
+-   Endpoint method: POST
+-   Query parameters:
+    -   N/A
+-   Headers:
+    -   N/A
+-   Request shape (JSON):
+    ```json
+    {
+        "username": "string",
+        "password": "string"
+    }
+    ```
+-   Response: Token and account information
+-   Response shape:
+    ```json
+    {
+        "access_token": "string",
+        "token_type": "Bearer",
+        "account": {
+            "id": "string",
+            "username": "string"
         }
-      ]
-    }
-    ```
-
-### Delete a user
-* Endpoint path: /users/{_id}
-* Endpoint method: DELETE
-* Query parameters:
-  * N/A
-* Headers:
-  * Authorization: Bearer token
-* Request shape (JSON):
-  * N/A
-* Response: an indication of success or failure
-* Response shape:
-    ```json
-    {
-      "success": boolean,
-      "deletedCount": int
-    }
-    ```
-
-## ROOM MANAGEMENT
-
-The application will use the following endpoints to provide users a with the ability to create and manage access to their own chatrooms.
-### Create a Room
-* Endpoint path: /rooms
-* Endpoint method: POST
-* Query parameters:
-  * N/A
-* Headers:
-  * Authorization: Bearer token
-* Request shape (JSON):
-    ```json
-    {
-      "name": string
-    }
-    ```
-* Response: Creating a new chat room
-* Response shape (JSON):
-    ```json
-    {
-      "_id": string,
-      "name": string
-    }
-    ```
-
-### List of Rooms
-* Endpoint path: /rooms
-* Endpoint method: GET
-* Query parameters:
-* Headers:
-  * Authorization: Bearer token
-* Request shape (JSON):
-  * N/A
-* Response: List of rooms
-* Response shape (JSON):
-    ```json
-    {
-      "rooms": [
-        {
-          "_id": string
-          "name": string
-        }
-      ]
-    }
-    ```
-
-### Delete a Room
-* Endpoint path: /rooms/{_id}
-* Endpoint method: DELETE
-* Query parameters:
-  * N/A
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request shape (JSON):
-  * N/A
-
-* Response: Confirmation of room deletion
-
-* Response shape (JSON):
-    ```json
-    {
-      "success": boolean,
-      "deletedCount": int
     }
     ```
 
 ## MESSAGE MANAGEMENT
 
-The following endpoints will be used to manage the sending and receiving of messages by chat app users as well as providing users with a chatrooms message history when entering the chatroom
-### Create a new Message
+The following endpoints will be used to store messages which are sent by users and then provide them as a message history when users enter the chatroom and connect via Websocket
 
-* Endpoint path: /rooms/{chatroom_id}/messages
-* Endpoint method: POST
+### Create Message
 
-* Headers:
-  * Authorization: Bearer token
-
-* Request body:
+-   Endpoint path: /messages
+-   Endpoint method: POST
+-   Headers:
+    -   Authorization: Bearer token
+-   Request body:
     ```json
     {
-      "user_id": int
-      "content": string
+        "user_id": "string",
+        "chatroom_id": "string",
+        "content": "string"
+    }
+    ```
+-   Response: The message request body with a timestamp and id
+-   Response shape:
+    ```json
+    {
+        "id": "string",
+        "user_id": "string",
+        "chatroom_id": "string",
+        "content": "string",
+        "timestamp": "2024-03-20T13:57:30.317Z"
     }
     ```
 
-* Response: An indication of success or failure
-* Response shape:
+### Get Room Message List
+
+-   Endpoint path: /chatroom/{chatroom_id}/messages
+-   Endpoint method: GET
+-   Headers:
+    -   Authorization: Bearer token
+-   Request body:
+    -   N/A
+-   Response: A list of all messages for the indicated chatroom
+-   Response shape:
     ```json
     {
-      "message": string
+        "messages": [
+            {
+                "id": "string",
+                "user_id": "string",
+                "chatroom_id": "string",
+                "content": "string",
+                "timestamp": "2024-03-20T13:59:04.377Z"
+            }
+        ]
     }
     ```
 
-### Get list of messages
+### Get Message
 
-* Endpoint path: /rooms/{chatroom_id}/messages
-* Endpoint method: GET
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request body:
-  * N/A
-
-* Response: A list of all messages in chat room
-* Response shape:
+-   Endpoint path: /messages/{id}
+-   Endpoint method: GET
+-   Headers:
+    -   Authorization: Bearer token
+-   Request body:
+    -   N/A
+-   Response: The message with the indicated id
+-   Response shape:
     ```json
     {
-      "messages": [
-        {
-          "_id": string,
-          "user_id": string,
-          "content": string,
-          "timestamp": datetime
-        }
-      ]
+        "id": "string",
+        "user_id": "string",
+        "chatroom_id": "string",
+        "content": "string",
+        "timestamp": "2024-03-20T14:00:14.575Z"
     }
     ```
 
-### Delete message
+### Get User Message List
 
-* Endpoint path: /rooms/{chatroom_id}/messages/{_id}
-* Endpoint method: DELETE
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request body:
-  * N/A
-
-* Response: A list of all messages in chat room
-* Response shape:
+-   Endpoint path: /account/{user_id}/messages
+-   Endpoint method: GET
+-   Headers:
+    -   Authorization: Bearer token
+-   Request body:
+    -   N/A
+-   Response: A list of messages for the indicated user
+-   Response shape:
     ```json
     {
-      "success": boolean,
-      "deletedCount": int
-    }
-    ```
-
-### Edit message
-
-* Endpoint path: /rooms/{chatroom_id}/messages/{_id}
-* Endpoint method: PUT
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request body:
-  ```json
-    {
-      "content": string
-    }
-    ```
-
-* Response: A list of all messages in chat room
-* Response shape:
-    ```json
-    {
-      "success": boolean,
-      "deletedCount": int,
-      "time_of_edit": datetime
+        "messages": [
+            {
+                "id": "string",
+                "user_id": "string",
+                "chatroom_id": "string",
+                "content": "string",
+                "timestamp": "2024-03-20T14:01:53.985Z"
+            }
+        ]
     }
     ```

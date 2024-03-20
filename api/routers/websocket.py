@@ -1,13 +1,9 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
 from queries.websocket import ConnectionManager
-
-# from queries.messages import MessageRepository
+from authenticator import authenticator
 
 
 router = APIRouter()
-
-# db_repo = MessageRepository()
-# manager = ConnectionManager(db_repo)
 
 
 @router.websocket("/chat/{client_id}")
