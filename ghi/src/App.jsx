@@ -11,7 +11,11 @@ const basename = import.meta.env.VITE_PUBLIC_URL.replace(domain, '')
 const API_HOST = import.meta.env.VITE_API_HOST
 
 if (!API_HOST) {
-  throw new Error('VITE_API_HOST is not defined')
+    throw new Error('VITE_API_HOST is not defined')
+}
+
+if (!basename) {
+    throw new Error('basename is not defined')
 }
 
 function App() {
@@ -26,7 +30,7 @@ function App() {
                 </Routes>
             </div>
         </BrowserRouter>
-  )
+    )
 }
 
 export default App
