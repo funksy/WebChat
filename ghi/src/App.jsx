@@ -7,7 +7,7 @@ import VertNavBar from './components/VertNavBar'
 // When using environment variables, you should do a check to see if
 // they are defined or not and throw an appropriate error message
 const domain = /https:\/\/[^/]+/
-const basename = process.env.PUBLIC_URL.replace(domain, '')
+const basename = import.meta.env.VITE_PUBLIC_URL.replace(domain, '')
 const API_HOST = import.meta.env.VITE_API_HOST
 
 if (!API_HOST) {

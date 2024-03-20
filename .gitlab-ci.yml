@@ -55,7 +55,7 @@ build-front-end-job:
         # You need to substitute in your real values for
         # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
         # Don't forget to also replace PROJECT NAME in the npm run build line as well
-        PUBLIC_URL: https://the-furious-five.gitlab.io/module-3-chat/
+        VITE_PUBLIC_URL: https://the-furious-five.gitlab.io/module-3-chat/
         VITE_API_HOST: https://nov-2023-5-api.mod3projects.com/
         VITE_WS_HOST: wss://nov-2023-5-api.mod3projects.com/
     script:
