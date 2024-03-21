@@ -1,3 +1,4 @@
+import chaticon from '../assets/robot-message-icon.svg'
 import { useGetTokenQuery } from '../store/apiSlice'
 
 const getColorFromId = (str) => {
@@ -59,7 +60,7 @@ const Message = (props) => {
                     <img
                         style={{ backgroundColor: color }}
                         className="inline bg-[length:20px_20px] rounded-2xl shadow-[0_2px_4px_0] shadow-black"
-                        src="src/assets/robot-message-icon.svg"
+                        src={chaticon}
                         width="35px"
                     />
                     <span
