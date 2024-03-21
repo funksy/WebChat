@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        pop: ['Odibee Sans']
+        pop: ['Share Tech Mono']
       },
       colors: {
         custom: {

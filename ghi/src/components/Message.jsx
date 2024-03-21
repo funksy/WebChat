@@ -59,7 +59,7 @@ const Message = (props) => {
                     <img
                         style={{ backgroundColor: color }}
                         className="inline bg-[length:20px_20px] rounded-2xl shadow-[0_2px_4px_0] shadow-black"
-                        src="../../assets/robot-message-icon.svg"
+                        src="src/assets/robot-message-icon.svg"
                         width="35px"
                     />
                     <span

@@ -12,7 +12,7 @@ const UserAvatar = () => {
             </div>
             <img
                 className="w-36 opacity-85 h-auto bg-custom-gold self-center m-4 mt-0 rounded-md shadow-[0_2px_4px_0] shadow-black"
-                src="../assets/robot-message-icon.svg"
+                src="src/assets/robot-message-icon.svg"
             />
         </div>
   )
