@@ -70,6 +70,7 @@ const LoginPage = () => {
                     <p className="text-sm text-center mt-4">
                         {"If you don't have an account, "}
                         <button
+                            type="button"
                             className="text-custom-gold"
                             onClick={() => navigate('/signup')}
                         >

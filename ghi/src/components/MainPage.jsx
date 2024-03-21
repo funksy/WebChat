@@ -6,7 +6,7 @@ import useWebSocket from 'react-use-websocket'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeChatLog, addChatEntry } from '../store/chatLogSlice'
-import { initializeUsers } from '../store/activeUsersSlice'
+import { initializeUsers, modifyUsersList } from '../store/activeUsersSlice'
 import { setMessageContent, pushButton } from '../store/chatInputSlice'
 
 const WS_HOST = import.meta.env.VITE_WS_HOST
@@ -43,7 +43,7 @@ const MainPage = () => {
     if (newMessage && newMessage.type === 'user_status') {
       // const chatEntry = `${newMessage.payload.user_id} just ${newMessage.payload.status}ed`
       // dispatch(addChatEntry(chatEntry))
-      // dispatch(modifyUsersList(newMessage.payload))
+      dispatch(modifyUsersList(newMessage.payload))
       return
     }
     if (newMessage && newMessage.type === 'message') {

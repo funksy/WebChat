@@ -84,7 +84,8 @@ const SignUpPage = () => {
                     <p className="text-sm text-center mt-4">
                         {'If you already have an account, '}
                         <button
-                            className="text-custom-gold"
+                            type="button"
+                        className="text-custom-gold"
                             onClick={() => navigate('/login')}
                         >
                             log in
